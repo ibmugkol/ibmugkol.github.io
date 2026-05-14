@@ -1,0 +1,335 @@
+/* Combined CSS for IBM User Group Kolkata */
+:root {
+    --primary-color: #0f62fe; /* IBM Blue */
+    --secondary-color: #001d6c; /* Dark Blue */
+    --accent-color: #00e676; /* Accent Green */
+    --bg-color: #f4f7fb;
+    --text-color: #161616;
+    --dark-bg: #161616;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Navbar */
+.navbar {
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+.navbar-brand {
+    font-weight: 700;
+    color: var(--secondary-color) !important;
+    letter-spacing: -0.5px;
+}
+.nav-link {
+    font-weight: 600;
+    color: var(--text-color) !important;
+    margin: 0 10px;
+    position: relative;
+    transition: color 0.3s ease;
+}
+.nav-link:hover, .nav-link.active {
+    color: var(--primary-color) !important;
+}
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+}
+.nav-link:hover::after, .nav-link.active::after {
+    width: 100%;
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+    color: white;
+    padding: 120px 0;
+    position: relative;
+    overflow: hidden;
+}
+.hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+    animation: pulse 15s infinite linear;
+}
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+.hero-title {
+    font-weight: 800;
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    letter-spacing: -1px;
+    position: relative;
+    z-index: 1;
+}
+.hero-subtitle {
+    font-weight: 300;
+    font-size: 1.25rem;
+    margin-bottom: 40px;
+    opacity: 0.9;
+    position: relative;
+    z-index: 1;
+}
+.btn-custom {
+    background-color: var(--accent-color);
+    color: var(--dark-bg);
+    font-weight: 700;
+    padding: 12px 30px;
+    border-radius: 50px;
+    border: none;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 4px 15px rgba(0, 230, 118, 0.4);
+}
+.btn-custom:hover {
+    background-color: #00c853;
+    color: var(--dark-bg);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 230, 118, 0.6);
+}
+
+/* Section Titles */
+.section-title {
+    font-weight: 700;
+    color: var(--secondary-color);
+    margin-bottom: 40px;
+    position: relative;
+    display: inline-block;
+}
+.section-title::after {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 4px;
+    background-color: var(--primary-color);
+    bottom: -10px;
+    left: 0;
+    border-radius: 2px;
+}
+
+/* Page Header (Meetups page) */
+.page-header {
+    background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+    color: white;
+    padding: 80px 0;
+    text-align: center;
+}
+.page-title {
+    font-weight: 800;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+.page-subtitle {
+    font-weight: 300;
+    opacity: 0.9;
+}
+
+/* Cards */
+.meetup-card {
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    transition: all 0.4s ease;
+    height: 100%;
+    background-color: white;
+    overflow: hidden;
+}
+.meetup-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+}
+.card-header-custom {
+    background-color: rgba(15, 98, 254, 0.1);
+    color: var(--primary-color);
+    font-weight: 700;
+    padding: 15px 20px;
+    border-bottom: none;
+    display: flex;
+    align-items: center;
+}
+.card-header-custom i {
+    margin-right: 10px;
+}
+.card-body {
+    padding: 25px;
+}
+.card-title {
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 15px;
+    font-size: 1.25rem;
+}
+.card-text {
+    color: #555;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+.meetup-meta {
+    display: flex;
+    align-items: center;
+    font-size: 0.85rem;
+    color: #777;
+    margin-bottom: 15px;
+}
+.meetup-meta i {
+    margin-right: 8px;
+    color: var(--primary-color);
+}
+.meetup-meta div {
+    margin-right: 15px;
+}
+
+/* Meetup List Card variant (Meetups page) */
+.meetup-list-card {
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    transition: all 0.4s ease;
+    background-color: white;
+    overflow: hidden;
+    margin-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+}
+@media (min-width: 768px) {
+    .meetup-list-card {
+        flex-direction: row;
+        align-items: center;
+    }
+}
+.meetup-list-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+}
+.card-date-box {
+    background-color: rgba(15, 98, 254, 0.05);
+    color: var(--primary-color);
+    padding: 30px 20px;
+    text-align: center;
+    min-width: 180px;
+    border-right: 1px solid rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+@media (max-width: 767px) {
+    .card-date-box {
+        border-right: none;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+        padding: 20px;
+    }
+}
+.date-month {
+    font-weight: 700;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+}
+.date-day {
+    font-weight: 800;
+    font-size: 2.5rem;
+    line-height: 1;
+    margin: 5px 0;
+}
+.date-year {
+    font-weight: 600;
+    color: var(--secondary-color);
+}
+.meetup-list-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    font-size: 0.9rem;
+    color: #777;
+}
+.meetup-list-meta div {
+    margin-right: 20px;
+    margin-bottom: 10px;
+}
+.meetup-list-meta i {
+    margin-right: 8px;
+    color: var(--primary-color);
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.02);
+}
+.empty-state i {
+    font-size: 3rem;
+    color: #ccc;
+    margin-bottom: 20px;
+}
+.empty-state h4 {
+    color: var(--secondary-color);
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+/* Footer */
+.footer {
+    background-color: var(--dark-bg);
+    color: #fff;
+    padding: 60px 0 30px;
+    margin-top: auto;
+}
+.footer-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #fff;
+}
+.footer p {
+    color: #aaa;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+.social-icons {
+    margin-top: 20px;
+}
+.social-icons a {
+    color: #aaa;
+    font-size: 1.2rem;
+    margin-right: 15px;
+    transition: color 0.3s ease;
+}
+.social-icons a:hover {
+    color: var(--accent-color);
+}
+.footer-divider {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    margin: 40px 0 20px;
+}
+.copyright {
+    color: #777;
+    font-size: 0.85rem;
+    text-align: center;
+}
