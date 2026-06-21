@@ -14,7 +14,7 @@
     document.documentElement.setAttribute('data-theme', theme);
 })();
 
-function initializeApp() {
+async function initializeApp() {
     const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
     const currentPath = window.location.pathname;
 
@@ -22,93 +22,84 @@ function initializeApp() {
     const isSubdir = currentPath.includes('/meetups/');
     const prefix = isSubdir ? '../' : '';
 
-    // 1. Render Universal Header
-    const headerContainer = document.getElementById('universal-header');
-    if (headerContainer) {
-        headerContainer.innerHTML = `
-            <nav class="navbar navbar-expand-lg sticky-top py-3">
-                <div class="container">
-                    <a class="navbar-brand" href="${prefix}index.html">
-                        <img src="${prefix}assets/icon-dark.svg" class="bob-logo-icon dark-icon me-2" alt="IBM UG logo" width="28" height="28">
-                        <img src="${prefix}assets/icon.svg" class="bob-logo-icon light-icon me-2" alt="IBM UG logo" width="28" height="28">
-                        IBM UG Kolkata
-                    </a>
-                    <button class="navbar-toggler border-0 text-color" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="fa-solid fa-bars" style="color: var(--text-color);"></i>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav ms-auto align-items-center">
-                            <li class="nav-item">
-                                <a class="nav-link" id="nav-home" href="${prefix}index.html">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="nav-meetups" href="${prefix}meetups.html">Meetups</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="nav-members" href="${prefix}members.html">Members</a>
-                            </li>
-                            <li class="nav-item">
-                                <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle theme">
-                                    <i class="fa-regular ${currentTheme === 'dark' ? 'fa-sun' : 'fa-moon'}"></i>
-                                </button>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        `;
+    // Helper to adjust relative paths inside injected containers
+    function adjustRelativePaths(container, pathPrefix) {
+        if (!pathPrefix) return;
+        
+        // Adjust href on all local anchor links
+        container.querySelectorAll('a').forEach(link => {
+            const href = link.getAttribute('href');
+            if (href && !href.startsWith('http') && !href.startsWith('//') && !href.startsWith('#') && !href.startsWith('mailto:') && !href.startsWith('tel:')) {
+                link.setAttribute('href', pathPrefix + href);
+            }
+        });
 
-        // Set active nav item
-        if (currentPath.includes('meetups')) {
-            const meetupsLink = document.getElementById('nav-meetups');
-            if (meetupsLink) meetupsLink.classList.add('active');
-        } else if (currentPath.includes('members.html')) {
-            const membersLink = document.getElementById('nav-members');
-            if (membersLink) membersLink.classList.add('active');
-        } else {
-            const homeLink = document.getElementById('nav-home');
-            if (homeLink) homeLink.classList.add('active');
-        }
-
-        // Setup Theme Toggle Listener
-        setupThemeToggle();
+        // Adjust src on all local images
+        container.querySelectorAll('img').forEach(img => {
+            const src = img.getAttribute('src');
+            if (src && !src.startsWith('http') && !src.startsWith('//') && !src.startsWith('data:')) {
+                img.setAttribute('src', pathPrefix + src);
+            }
+        });
     }
 
-    // 2. Render Universal Footer
+    // 1. Fetch & Render Universal Header
+    const headerContainer = document.getElementById('universal-header');
+    if (headerContainer) {
+        try {
+            const response = await fetch(`${prefix}header.html`);
+            if (response.ok) {
+                const headerHtml = await response.text();
+                headerContainer.innerHTML = headerHtml;
+
+                // Adjust relative paths in the header for subfolders
+                adjustRelativePaths(headerContainer, prefix);
+
+                // Update theme toggle icon based on current theme
+                const themeToggleIcon = headerContainer.querySelector('#theme-toggle i');
+                if (themeToggleIcon) {
+                    themeToggleIcon.className = currentTheme === 'dark' ? 'fa-regular fa-sun' : 'fa-regular fa-moon';
+                }
+
+                // Set active nav item
+                if (currentPath.includes('meetups')) {
+                    const meetupsLink = headerContainer.querySelector('#nav-meetups');
+                    if (meetupsLink) meetupsLink.classList.add('active');
+                } else if (currentPath.includes('members.html')) {
+                    const membersLink = headerContainer.querySelector('#nav-members');
+                    if (membersLink) membersLink.classList.add('active');
+                } else {
+                    const homeLink = headerContainer.querySelector('#nav-home');
+                    if (homeLink) homeLink.classList.add('active');
+                }
+
+                // Setup Theme Toggle Listener
+                setupThemeToggle();
+            } else {
+                console.error('Failed to load header.html:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Error fetching header.html:', error);
+        }
+    }
+
+    // 2. Fetch & Render Universal Footer
     const footerContainer = document.getElementById('universal-footer');
     if (footerContainer) {
-        footerContainer.innerHTML = `
-            <footer class="footer">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-6 mb-4 mb-md-0">
-                            <h3 class="footer-brand">
-                                <img src="${prefix}assets/icon-dark.svg" class="bob-logo-icon dark-icon me-2" alt="IBM UG logo" width="24" height="24">
-                                <img src="${prefix}assets/icon.svg" class="bob-logo-icon light-icon me-2" alt="IBM UG logo" width="24" height="24">
-                                IBM UG Kolkata
-                            </h3>
-                            <p class="mb-1 text-white opacity-75">Community Leader: <a class="text-decoration-none text-white fw-semibold" href="https://go.omniaigs.com/r/jGyS1u" target="_blank">Soumyadeep Mandal</a></p>
-                            <p class="opacity-75">Organizer & Host: IBM User Group Kolkata & Soumyadeep Mandal</p>
-                            
-                            <div class="social-icons">
-                                <a href="https://go.omniaigs.com/r/KvG8z1" aria-label="X" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
-                                <a href="https://go.omniaigs.com/r/1vfbJd" aria-label="LinkedIn" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
-                                <a href="https://go.omniaigs.com/r/eT8P9K" aria-label="GitHub" target="_blank"><i class="fa-brands fa-github"></i></a>
-                            </div>
-                        </div>
-                        <div class="col-md-6 text-md-end d-flex flex-column justify-content-between">
-                            <div>
-                                <p class="mb-2"><a href="${prefix}index.html" class="text-decoration-none">Home</a></p>
-                                <p class="mb-2"><a href="${prefix}meetups.html" class="text-decoration-none">Meetups</a></p>
-                                <p class="mb-0"><a href="${prefix}members.html" class="text-decoration-none">Members</a></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="footer-divider"></div>
-                    <p class="copyright">&copy; 2026 IBM User Group Kolkata. Adhering to the IBM Design Language.</p>
-                </div>
-            </footer>
-        `;
+        try {
+            const response = await fetch(`${prefix}footer.html`);
+            if (response.ok) {
+                const footerHtml = await response.text();
+                footerContainer.innerHTML = footerHtml;
+
+                // Adjust relative paths in the footer for subfolders
+                adjustRelativePaths(footerContainer, prefix);
+            } else {
+                console.error('Failed to load footer.html:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Error fetching footer.html:', error);
+        }
     }
 
     // 3. Initialize Bob Waving Animation
