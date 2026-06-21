@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unlocking IBM Bob: A Deep Dive and Showcase - IBM User Group Kolkata</title>
+    <!-- Meta tags for SEO -->
+    <meta name="description"
+        content="Join IBM User Group Kolkata for a deep dive into IBM Bob, the next-generation agentic AI coding partner. 30th June 2026, 11 AM - 12 PM. Online event.">
+    <!-- Favicons -->
+    <link rel="icon" href="../assets/icon.svg" type="image/svg+xml" media="(prefers-color-scheme: light)">
+    <link rel="icon" href="../assets/icon-dark.svg" type="image/svg+xml" media="(prefers-color-scheme: dark)">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts (IBM Plex) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/main.css">
+    <!-- Inline script to apply theme instantly, avoiding flicker -->
+    <script>
+        (function () {
+            let theme = 'light';
+            try {
+                const savedTheme = localStorage.getItem('theme');
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                theme = savedTheme || (prefersDark ? 'dark' : 'light');
+            } catch (e) {
+                try {
+                    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                    theme = prefersDark ? 'dark' : 'light';
+                } catch (err) { }
+            }
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
+    <style>
+        .breadcrumb-container {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            margin-bottom: 2rem;
+        }
+
+        .breadcrumb-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .breadcrumb-link:hover {
+            text-decoration: underline;
+        }
+
+        .meetup-badge {
+            display: inline-block;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 6px 12px;
+            border-radius: 4px;
+            margin-bottom: 1.25rem;
+            background-color: rgba(15, 98, 254, 0.1);
+            color: var(--primary-color);
+            border: 1px solid rgba(15, 98, 254, 0.2);
+        }
+
+        .event-sidebar-card {
+            border: 1px solid var(--border-color);
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+            padding: 24px;
+            position: sticky;
+            top: 100px;
+        }
+
+        .sidebar-detail-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .sidebar-detail-item i {
+            font-size: 1.25rem;
+            color: var(--primary-color);
+            margin-right: 14px;
+            margin-top: 3px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .sidebar-detail-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+            margin-bottom: 2px;
+        }
+
+        .sidebar-detail-value {
+            font-weight: 600;
+            color: var(--text-color);
+            font-size: 0.95rem;
+        }
+
+        .speaker-card {
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-layer-1);
+            border-radius: 8px;
+            padding: 24px;
+            margin-top: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        @media (max-width: 576px) {
+            .speaker-card {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        .speaker-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: var(--bg-layer-2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--border-color);
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            flex-shrink: 0;
+        }
+
+        .speaker-name {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 4px;
+        }
+
+        .speaker-title {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .speaker-bio {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 0;
+            line-height: 1.5;
+        }
+
+        .detail-section-title {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            position: relative;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border-color);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Universal Header Placeholder -->
+    <div id="universal-header"></div>
+
+    <!-- Main Content Section -->
+    <section class="py-5">
+        <div class="container">
+            <!-- Breadcrumbs -->
+            <div class="breadcrumb-container">
+                <a href="../meetups.html" class="breadcrumb-link"><i class="fa-solid fa-arrow-left me-2"></i>Back to
+                    Meetups</a>
+            </div>
+
+            <div class="row g-5">
+                <!-- Left Column: Overview and Speaker -->
+                <div class="col-lg-8">
+                    <span class="meetup-badge"><i class="fa-solid fa-bolt me-1"></i> Featured Event</span>
+                    <h1 class="hero-title text-start mb-4">Unlocking IBM Bob: A Deep Dive and Showcase</h1>
+
+                    <div class="mt-4">
+                        <h3 class="detail-section-title">About the Event</h3>
+                        <p class="card-text mb-4">
+                            Join us for an exclusive, developer-focused session on <strong>IBM Bob</strong>—IBM's
+                            next-generation agentic AI coding partner. Built to transcend basic autocomplete utilities,
+                            IBM Bob represents a major leap in operationalizing AI across the entire software
+                            development lifecycle. In this meetup, we will take a deep dive into Bob's capabilities,
+                            demonstrating how it acts as an autonomous yet human-in-the-loop developer assistant.
+                        </p>
+
+                        <h4 class="h5 mt-4 mb-3" style="color: var(--primary-color);">What We'll Cover:</h4>
+                        <ul class="card-text mb-4" style="padding-left: 20px;">
+                            <li class="mb-2"><strong>Agentic vs. Autocomplete:</strong> Understanding the architecture
+                                of agentic coding assistants and how IBM Bob operates as a true development partner.
+                            </li>
+                            <li class="mb-2"><strong>Actionable Capabilities Showcase:</strong> Watch Bob read
+                                codebases, run terminal commands, and invoke Model Context Protocol (MCP) tools live.
+                            </li>
+                            <li class="mb-2"><strong>Enterprise Security & Compliance:</strong> A look at how Bob
+                                complies with strict security frameworks (HIPAA, FedRAMP) while maintaining high speed
+                                and flexibility.</li>
+                            <li class="mb-2"><strong>Tailored Development Modes:</strong> How to utilize specialized
+                                configurations (like Review Mode) to accelerate debugging, testing, and modernization
+                                tasks.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Speaker Card -->
+                    <div class="speaker-card">
+                        <div class="speaker-avatar">
+                            <i class="fa-solid fa-circle-user"></i>
+                        </div>
+                        <div>
+                            <div class="speaker-name">Sagrika Kumar</div>
+                            <div class="speaker-title">Product Manager, IBM Bob</div>
+                            <p class="speaker-bio">
+                                Sagrika is a Product Manager with IBM Bob with over 11+ years of experience in Data and
+                                AI. She has experience building platform products and Over the past 3+ years, has been
+                                focussed on enabling products with the genAI tech. In her current role she is working to
+                                enable modernization agents on Bob and looking at automation capabilities for Bob
+                                Support.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Host Section -->
+                    <div class="mt-5 p-4 border rounded"
+                        style="background-color: var(--card-bg); border-color: var(--border-color);">
+                        <h4 class="h5 mb-3"><i class="fa-solid fa-users text-primary me-2"></i>Community & Hosts</h4>
+                        <p class="card-text mb-0">
+                            This event is organized and hosted by the <strong>IBM User Group Kolkata</strong> and
+                            <strong>Soumyadeep Mandal</strong>. We aim to nurture local talent and bring technology
+                            leaders, developers, and students together to learn about IBM Cloud, AI, and Quantum
+                            computing innovations.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Right Column: Sidebar Stats & CTA -->
+                <div class="col-lg-4">
+                    <div class="event-sidebar-card">
+                        <h3 class="h5 mb-4 pb-2 border-bottom" style="font-weight: 600;">Event Info</h3>
+
+                        <!-- Date -->
+                        <div class="sidebar-detail-item">
+                            <i class="fa-regular fa-calendar-days"></i>
+                            <div>
+                                <div class="sidebar-detail-label">Date</div>
+                                <div class="sidebar-detail-value">30th June 2026</div>
+                            </div>
+                        </div>
+
+                        <!-- Time -->
+                        <div class="sidebar-detail-item">
+                            <i class="fa-regular fa-clock"></i>
+                            <div>
+                                <div class="sidebar-detail-label">Time</div>
+                                <div class="sidebar-detail-value">11:00 AM - 12:00 PM IST</div>
+                            </div>
+                        </div>
+
+                        <!-- Platform -->
+                        <div class="sidebar-detail-item">
+                            <i class="fa-solid fa-video"></i>
+                            <div>
+                                <div class="sidebar-detail-label">Location</div>
+                                <div class="sidebar-detail-value">Online Event (Virtual)</div>
+                            </div>
+                        </div>
+
+                        <!-- Host -->
+                        <div class="sidebar-detail-item">
+                            <i class="fa-solid fa-building-user"></i>
+                            <div>
+                                <div class="sidebar-detail-label">Hosts</div>
+                                <div class="sidebar-detail-value">IBM User Group Kolkata & Soumyadeep Mandal</div>
+                            </div>
+                        </div>
+
+                        <!-- CTA Button -->
+                        <div class="mt-4 pt-2">
+                            <a href="https://go.omniaigs.com/r/liTDhF" target="_blank" class="btn btn-custom w-100 py-3"
+                                style="border-radius: 6px;">
+                                Register on Omnia <i class="fa-solid fa-arrow-up-right-from-square ms-2"></i>
+                            </a>
+                            <p class="text-center small text-muted mt-3 mb-0"
+                                style="font-family: var(--font-mono); font-size: 0.75rem;">
+                                Registration is free but mandatory.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Universal Footer Placeholder -->
+    <div id="universal-footer"></div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../js/main.js"></script>
+</body>
+
+</html>
