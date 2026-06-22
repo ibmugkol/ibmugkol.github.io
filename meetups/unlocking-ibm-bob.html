@@ -8,6 +8,50 @@
     <!-- Meta tags for SEO -->
     <meta name="description"
         content="Join IBM User Group Kolkata for a deep dive into IBM Bob, the next-generation agentic AI coding partner. 30th June 2026, 11 AM - 12 PM. Online event.">
+
+    <!-- Open Graph Metadata -->
+    <meta property="og:title" content="Unlocking IBM Bob: A Deep Dive and Showcase - IBM User Group Kolkata">
+    <meta property="og:description" content="Join IBM User Group Kolkata for a deep dive into IBM Bob, the next-generation agentic AI coding partner. 30th June 2026, 11 AM - 12 PM. Online event.">
+    <meta property="og:image" content="https://ibmugkol.github.io/assets/Unlocking%20IBM%20Bob%20A%20Deep%20Dive%20and%20Showcase.jpg">
+    <meta property="og:url" content="https://ibmugkol.github.io/meetups/unlocking-ibm-bob.html">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card Metadata -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Unlocking IBM Bob: A Deep Dive and Showcase - IBM User Group Kolkata">
+    <meta name="twitter:description" content="Join IBM User Group Kolkata for a deep dive into IBM Bob, the next-generation agentic AI coding partner. 30th June 2026, 11 AM - 12 PM. Online event.">
+    <meta name="twitter:image" content="https://ibmugkol.github.io/assets/Unlocking%20IBM%20Bob%20A%20Deep%20Dive%20and%20Showcase.jpg">
+
+    <!-- JSON-LD Event Metadata -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Event",
+      "name": "Unlocking IBM Bob: A Deep Dive and Showcase",
+      "startDate": "2026-06-30T11:00:00+05:30",
+      "endDate": "2026-06-30T12:00:00+05:30",
+      "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "location": {
+        "@type": "VirtualLocation",
+        "url": "https://go.omniaigs.com/r/liTDhF"
+      },
+      "image": [
+        "https://ibmugkol.github.io/assets/Unlocking%20IBM%20Bob%20A%20Deep%20Dive%20and%20Showcase.jpg"
+      ],
+      "description": "Join IBM User Group Kolkata for a deep dive into IBM Bob, the next-generation agentic AI coding partner. Explore autonomous development workflows, Model Context Protocol (MCP) tool integration, live capabilities showcase, and enterprise configurations.",
+      "organizer": {
+        "@type": "Organization",
+        "name": "IBM User Group Kolkata",
+        "url": "https://ibmugkol.github.io"
+      },
+      "performer": {
+        "@type": "Person",
+        "name": "Sagrika Kumar",
+        "jobTitle": "Product Manager, IBM Bob"
+      }
+    }
+    </script>
     <!-- Favicons -->
     <link rel="icon" href="../assets/icon.svg" type="image/svg+xml" media="(prefers-color-scheme: light)">
     <link rel="icon" href="../assets/icon-dark.svg" type="image/svg+xml" media="(prefers-color-scheme: dark)">
@@ -41,6 +85,53 @@
         })();
     </script>
     <style>
+        .featured-image-container {
+            width: 100%;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: center;
+            background-color: var(--bg-layer-1);
+        }
+
+        .featured-image-container img {
+            width: 100%;
+            height: auto;
+            max-width: 100%;
+            display: block;
+        }
+
+        .event-quick-meta {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .event-quick-meta i {
+            color: var(--primary-color) !important;
+            margin-right: 6px;
+        }
+
+        .featured-image-placeholder-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            opacity: 0.8;
+            transition: opacity 0.2s ease;
+        }
+
+        .featured-image-placeholder-content i {
+            font-size: 3rem;
+            margin-bottom: 12px;
+            color: var(--primary-color);
+        }
+
         .breadcrumb-container {
             font-family: var(--font-mono);
             font-size: 0.85rem;
@@ -192,7 +283,20 @@
                 <!-- Left Column: Overview and Speaker -->
                 <div class="col-lg-8">
                     <span class="meetup-badge"><i class="fa-solid fa-bolt me-1"></i> Featured Event</span>
-                    <h1 class="hero-title text-start mb-4">Unlocking IBM Bob: A Deep Dive and Showcase</h1>
+                    <h1 class="hero-title text-start mb-3">Unlocking IBM Bob: A Deep Dive and Showcase</h1>
+
+                    <!-- Event Quick Metadata Row -->
+                    <div class="d-flex flex-wrap gap-3 mb-4 event-quick-meta">
+                        <div><i class="fa-regular fa-calendar-days"></i> 30th June 2026</div>
+                        <div><i class="fa-regular fa-clock"></i> 11:00 AM - 12:00 PM IST</div>
+                        <div><i class="fa-solid fa-video"></i> Online Event</div>
+                        <div><i class="fa-solid fa-users"></i> IBM UG Kolkata & Soumyadeep Mandal</div>
+                    </div>
+
+                    <!-- Featured Image -->
+                    <div class="featured-image-container">
+                        <img src="../assets/Unlocking IBM Bob A Deep Dive and Showcase.jpg" alt="Unlocking IBM Bob: A Deep Dive and Showcase">
+                    </div>
 
                     <div class="mt-4">
                         <h3 class="detail-section-title">About the Event</h3>
